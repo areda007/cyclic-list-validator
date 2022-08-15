@@ -17,7 +17,7 @@ public class CyclicListValidtorService {
     return result;
   }
 
-  private boolean isItCyclic(int[] list) {
+  public boolean isItCyclic(int[] list) {
     if (list.length == 0) {
       return true;
     }
