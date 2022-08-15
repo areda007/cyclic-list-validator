@@ -7,6 +7,8 @@ services:
       - "15672:15672"
   backend:
     image: areda007/clv-task
+    environment:
+      - spring.profiles.active=prod
     depends_on:
       - rabbitmq
     ports:

@@ -31,11 +31,6 @@ jobs:
     - name: Generate Jacoco Badge
       id: jacoco
       uses: cicirello/jacoco-badge-generator@v2
-
-    - name: Log coverage percentage
-      run: |
-        echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
-        echo "branches = ${{ steps.jacoco.outputs.branches }}"
         
     - name: Commit and push
       if: ${{ github.event_name != 'pull_request' }}
