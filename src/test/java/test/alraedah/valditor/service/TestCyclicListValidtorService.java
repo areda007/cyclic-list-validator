@@ -9,12 +9,11 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
+@TestPropertySource(properties = "rabbitmq.enable=false")
 class TestCyclicListValidtorService {
-
-  @Autowired
-  private CyclicListValidtorService cyclicListValidtorService;
 
   @Test
   void testValidate_validCyclicArray() {
@@ -59,5 +58,6 @@ class TestCyclicListValidtorService {
     assertEquals(true, result.get(cyclicListName));
   }
 
-
+  @Autowired
+  private CyclicListValidtorService cyclicListValidtorService;
 }

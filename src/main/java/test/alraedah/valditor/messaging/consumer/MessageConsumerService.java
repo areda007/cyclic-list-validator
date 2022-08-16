@@ -1,5 +1,7 @@
 package test.alraedah.valditor.messaging.consumer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import test.alraedah.valditor.messaging.consumer.exception.CustomFailureException;
@@ -8,6 +10,8 @@ import test.alraedah.valditor.service.CyclicListValidtorService;
 
 @Component
 public class MessageConsumerService {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(MessageConsumerService.class);
 
   private CyclicListValidtorService cyclicListValidtorService;
 
@@ -25,6 +29,7 @@ public class MessageConsumerService {
 
     // testing dlq and retrial scenarios
     if (cyclicArray.getName().equalsIgnoreCase("retry")) {
+      LOGGER.error("Failed on purpose!! To trigger retry flow and message rejection.");
       throw new CustomFailureException("Failed on purpose!!");
     }
   }

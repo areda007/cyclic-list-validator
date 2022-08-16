@@ -16,6 +16,7 @@
 	<description>Service responsible for verifying cyclic lists.</description>
 	<properties>
 		<java.version>11</java.version>
+		<testcontainers.version>1.16.2</testcontainers.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,7 +58,28 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.9</version>
 		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>rabbitmq</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>testcontainers-bom</artifactId>
+				<version>${testcontainers.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>

@@ -1,34 +1,18 @@
 package test.alraedah.valditor.config;
 
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConditionalOnProperty(value = "rabbitmq.enable", havingValue = "true", matchIfMissing = true)
 public class RabbitMQConfig {
-
-  private static final String DEAD_LETTER_EXCHANGE = "deadLetterExchange";
-
-  private static final String DEAD_LETTER_BINDING = "deadLetter";
-
-  @Value("${cyclic.array.queue}")
-  private String queueName;
-
-  @Value("${spring.rabbitmq.username}")
-  private String username;
-
-  @Value("${spring.rabbitmq.password}")
-  private String password;
 
   @Bean
   DirectExchange deadLetterExchange() {
@@ -50,20 +34,22 @@ public class RabbitMQConfig {
     return QueueBuilder.nonDurable(queueName)
         .withArgument("x-dead-letter-exchange", DEAD_LETTER_EXCHANGE)
         .withArgument("x-dead-letter-routing-key", DEAD_LETTER_BINDING)
-        .withArgument("x-message-ttl", 60000).build();
+        .withArgument("x-message-ttl", TTL_PER_MESSAGE).build();
   }
 
-//  @Bean
-//  public MessageConverter jsonMessageConverter() {
-//    return new Jackson2JsonMessageConverter();
-//  }
+  // 1 minute
+  private static final int TTL_PER_MESSAGE = 60000;
 
-  
-//  public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-//    final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-//    rabbitTemplate.setMessageConverter(jsonMessageConverter());
-//    return rabbitTemplate;
-//  }
+  private static final String DEAD_LETTER_EXCHANGE = "deadLetterExchange";
 
+  private static final String DEAD_LETTER_BINDING = "deadLetter";
 
+  @Value("${cyclic.array.queue}")
+  private String queueName;
+
+  @Value("${spring.rabbitmq.username}")
+  private String username;
+
+  @Value("${spring.rabbitmq.password}")
+  private String password;
 }
