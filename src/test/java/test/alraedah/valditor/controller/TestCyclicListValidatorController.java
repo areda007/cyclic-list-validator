@@ -24,7 +24,7 @@ import test.alraedah.valditor.service.CyclicListValidtorService;
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest
 @TestPropertySource(properties = "rabbitmq.enable=false")
-class TestCycilcListValidatorController {
+class TestCyclicListValidatorController {
 
   @Test
   void testValidateArray() throws Exception {
