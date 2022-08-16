@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -41,6 +42,7 @@ class TestMessageConsumerService extends BaseRabbitMQIntegrationTest {
   }
 
   @Test
+  @Disabled
   void testRecivingMessage() throws CustomFailureException {
     CyclicArrayDto cyclicArray = new CyclicArrayDto("list11", new int[] {3, 0, 1, 2});
     amqpTemplate.convertAndSend(queueName, cyclicArray);
