@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ class TestMessageConsumerService extends BaseRabbitMQIntegrationTest {
 
   @BeforeEach
   void setUp() {
+    when(cyclicListValidatorService.isItCyclic(any(int[].class))).thenReturn(false);
     // rabbitListenerEndpointRegistry.start();
     rabbitAdmin.purgeQueue(queueName, true);
   }
@@ -42,7 +45,6 @@ class TestMessageConsumerService extends BaseRabbitMQIntegrationTest {
   }
 
   @Test
-  @Disabled
   void testRecivingMessage() throws CustomFailureException {
     CyclicArrayDto cyclicArray = new CyclicArrayDto("list11", new int[] {3, 0, 1, 2});
     amqpTemplate.convertAndSend(queueName, cyclicArray);

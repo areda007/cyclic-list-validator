@@ -43,6 +43,6 @@ public class CyclicListValidtorService {
       }
     }
 
-    return true;
+    return visited.size() == list.length;
   }
 }
