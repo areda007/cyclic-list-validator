@@ -6,9 +6,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,7 +21,7 @@ class TestMessageConsumerService extends BaseRabbitMQIntegrationTest {
   @MockBean
   private CyclicListValidtorService cyclicListValidatorService;
 
-  @Autowired
+  @InjectMocks
   private MessageConsumerService messageConsumerService;
 
   @Autowired
@@ -52,7 +51,6 @@ class TestMessageConsumerService extends BaseRabbitMQIntegrationTest {
   }
 
   @Test
-  @Disabled
   void testThrowingCustomException() {
     CyclicArrayDto cyclicArray = new CyclicArrayDto("retry", new int[] {3, 0, 1, 2});
     assertThrows(CustomFailureException.class,

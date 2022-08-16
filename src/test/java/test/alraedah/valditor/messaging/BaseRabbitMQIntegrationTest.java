@@ -27,7 +27,7 @@ public class BaseRabbitMQIntegrationTest {
 
   @Autowired
   protected RabbitAdmin rabbitAdmin;
-  
+
   @Autowired
   protected RabbitListenerEndpointRegistry rabbitListenerEndpointRegistry;
 
