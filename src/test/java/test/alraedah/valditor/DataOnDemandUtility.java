@@ -17,7 +17,7 @@ public class DataOnDemandUtility {
 
   public static Map<String, int[]> constructOutOfIndexArrayMap(String listName) {
 
-    return Map.of(listName, getNotCyclicArray());
+    return Map.of(listName, getNotCyclicOutOfIndexArray());
 
   }
 

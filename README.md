@@ -13,6 +13,7 @@ This project is providing an API endpoint that would allow you to check if array
 * [Demo](#demo)
 * [Continuous Integration Flow](#continuous-integration-flow)
 * [Room for Improvement](#room-for-improvement)
+* [Health Check](#health-check)
 
 
 
@@ -56,11 +57,10 @@ Please note that you do not need checkout and build the project (Thanks to our C
 
 
 ## Demo
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
+[![Watch the demo]](https://drive.google.com/file/d/1OK9mT5-Npf_U3VEt-qSK8pc37HhU2oup/view?usp=sharing)
 
 
-##Continuous Integration Flow
+## Continuous Integration Flow
 
 Once we push any change to master or we merge any request. This will trigger our CI workflow which is responsible for 
 - Checkout and build latest pushed code to generate java archive file (jar).
@@ -77,7 +77,10 @@ Room for improvement:
 
 - Setup Kuberenetes cluster.
 
-- Integrate with monitoring tools for better service observability.
+- Integrate with monitoring tools for better service observability. Monitor Dead Letter Queue as it is good sign for how many messages are rejected or timed out in our system. Telemetry is one of the most important things that gives indicator about service health.
 
 To do:
 - Fixing integration test for messageConsumer service for better coverage for all scenarios.
+
+## Health Check
+Please check HealthCheck endpoint  {serverIp}/health (localhost:8080/health).

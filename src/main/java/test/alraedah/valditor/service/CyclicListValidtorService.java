@@ -26,10 +26,11 @@ public class CyclicListValidtorService {
 
     int currentIndex = 0;
     while (visited.size() < list.length) {
+      currentIndex = list[currentIndex];
+      
       if (currentIndex >= list.length) {
         return false;
       }
-      currentIndex = list[currentIndex];
 
       if (visited.contains(currentIndex)) {
         // it means there's a loop here so it won't be valid cyclic list
